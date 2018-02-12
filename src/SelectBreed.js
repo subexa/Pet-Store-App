@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { fetchAnimalBreed } from './actions/actions';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { fetchAnimalBreed } from './actions/actions';
+import { fetchBreedImage } from './actions/actions';
+import { storeBreedName } from './actions/actions';
+import './SelectBreed.css';
 
 class SelectAnimal extends Component {
   componentDidMount = () => {
@@ -11,14 +16,19 @@ class SelectAnimal extends Component {
     const breedList = this.props.state.breedList;
     return(
       <div>
-        <div>
-          Adopt A Dog!
+        <div className="header">
+          Adopt A Fluffy Member To Your Family!
         </div>
-        <div className="breed-list">
+        <div className="breed-list-container">
           {breedList.map((breed,index) =>
-            <div key={index}>
+            <Link 
+              to="/details" 
+              key={index} 
+              className="breed"
+              onClick={() => this.props.dispatch(storeBreedName(breed))}
+            >
               {breed}
-            </div>
+            </Link>
           )}
         </div>
       </div>

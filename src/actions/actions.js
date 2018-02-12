@@ -8,7 +8,7 @@ export const fetchBreed = animal => {
 }
 
 export const fetchAnimalBreed = animal => {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(fetchBreed(animal));
     return fetch(`${API}/breeds/list/all`)
     .then(response => response.json())
@@ -21,5 +21,35 @@ export const receivedBreed = (breeds) => {
   return {
     type: 'RECEIVED_BREED',
     breeds
+  }
+}
+
+export const storeBreedName = (breed) => {
+  return {
+    type: 'STORE_BREED_NAME',
+    breed
+  }
+}
+
+export const fetchImage = (breed) => {
+  return {
+    type: 'FETCH_BREED_IMAGE',
+    breed
+  }
+}
+
+export const fetchBreedImage = (breedName) => {
+  return function(dispatch) {
+    dispatch(fetchImage(breedName));
+    return fetch(`https://dog.ceo/api/breed/${breedName}/images/random`)
+    .then(response => response.json())
+    .then(json => dispatch(receivedImage(json.message)))
+  }
+}
+
+export const receivedImage = (image) => {
+  return {
+    type: 'RECEIVED_IMAGE',
+    image
   }
 }
