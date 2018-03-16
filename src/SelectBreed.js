@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import AppHeader from './AppHeader';
 import { fetchAnimalBreed } from './actions/actions';
 import { fetchBreedImage } from './actions/actions';
 import { storeBreedName } from './actions/actions';
@@ -16,9 +17,7 @@ class SelectAnimal extends Component {
     const breedList = this.props.state.breedList;
     return(
       <div>
-        <div className="header">
-          Adopt A Fluffy Member To Your Family!
-        </div>
+        <AppHeader />
         <div className="breed-list-container">
           {breedList.map((breed,index) =>
             <Link 

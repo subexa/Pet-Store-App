@@ -2,29 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchBreedImage } from './actions/actions';
+import { fetchBreedImage, addToWishList } from './actions/actions';
+import AppHeader from './AppHeader';
 import './BreedImage.css';
 
 class BreedImage extends Component {
   componentDidMount = () => {
-    let selectedBreedName = this.props.state.selectedBreed.name;
-    if(selectedBreedName !== '') {
-      localStorage.setItem('selectedBreedName', JSON.stringify(selectedBreedName))
+    this.selectedBreedName = this.props.state.selectedBreed.name;
+    if(this.selectedBreedName !== '') {
+      localStorage.setItem('selectedBreedName', JSON.stringify(this.selectedBreedName))
     }
     else {
-      selectedBreedName = JSON.parse(localStorage.getItem('selectedBreedName'));
+      this.selectedBreedName = JSON.parse(localStorage.getItem('selectedBreedName'));
     }
-    this.props.dispatch(fetchBreedImage(selectedBreedName));
+    this.props.dispatch(fetchBreedImage(this.selectedBreedName));
   }
 
   render() {
-    console.log(this.props.state)
     const imageUrl = this.props.state.selectedBreed.image;
+    console.log(imageUrl)
     return(
-      <div className="image-header-container">
-        <div className="image-header">{}</div>
-        <div className="image-container">
-          <img src={imageUrl} className="image" />
+      <div>
+        <AppHeader />
+        <div className="image-header-container">
+          <div className="image-header">{`${this.selectedBreedName}`}</div>
+          <div className="image-container">
+            {imageUrl ? <img src={imageUrl} className="image" /> : <Loader />}
+          </div>
+          <button onClick={() => this.props.dispatch(addToWishList(this.selectedBreedName))}>
+            Wish To Adopt
+          </button>
         </div>
       </div>
     );
@@ -36,5 +43,10 @@ const mapStateToProps = state => {
     state: state
   }
 }
-
 export default connect(mapStateToProps)(BreedImage);
+
+class Loader extends Component {
+  render() {
+    return <div className="loader" />
+  }
+}

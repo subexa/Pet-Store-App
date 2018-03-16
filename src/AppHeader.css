@@ -1,0 +1,17 @@
+.header-container {
+  display: flex;
+}
+
+.header-title {
+  padding: 15px;
+  font-size: 30px;
+  color: #E6EE9C;
+  flex: 1;
+}
+
+.wish-list {
+  color: #E6EE9C;
+  height: 30px;
+  align-self: center;
+  padding-right: 10px;
+}

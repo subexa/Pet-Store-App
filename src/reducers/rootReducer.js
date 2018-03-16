@@ -3,7 +3,8 @@ const initialState = {
   selectedBreed: {
     name: '',
     image: ''
-  }
+  },
+  wishList: []
 }
 
 const rootReducer = (state=initialState, action) => {
@@ -18,6 +19,8 @@ const rootReducer = (state=initialState, action) => {
       return {...initialState, ...{selectedBreed: {...initialState.selectedBreed, name: action.breed }}}
     case 'RECEIVED_IMAGE':
       return {...initialState, ...{selectedBreed: {...initialState.selectedBreed, image: action.image}}}
+    case 'ADD_TO_WISH_LIST':
+      return {...initialState, wishList: action.name}
     default:
       return state;
   }

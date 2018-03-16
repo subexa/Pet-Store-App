@@ -53,3 +53,10 @@ export const receivedImage = (image) => {
     image
   }
 }
+
+export const addToWishList = (name) => {
+  return {
+    type: 'ADD_TO_WISH_LIST',
+    name
+  }
+}
