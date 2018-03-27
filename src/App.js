@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import AppHeader from './AppHeader';
 import SelectBreed from './SelectBreed';
 import BreedImage from './BreedImage';
 import WishList from './WishList';
